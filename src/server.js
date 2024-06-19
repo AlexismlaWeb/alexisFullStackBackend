@@ -13,9 +13,10 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+const uri = "mongodb+srv://alexismweb:Z0mB13NszjKfAAUC@clusterm1.fhsgffl.mongodb.net/?retryWrites=true&w=majority&appName=ClusterM1";
 
 // Connexion à la base de données
-const mongoUri = process.env.MONGO_URI;
+const mongoUri = uri;
 if (!mongoUri) {
     console.error('MongoDB URI is not defined in .env file');
     process.exit(1);
