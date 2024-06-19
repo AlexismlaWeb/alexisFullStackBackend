@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://alexisft-f73d630c7244.herokuapp.com';
 
 // Exemple de requête GET
 export const getExampleData = async () => {
