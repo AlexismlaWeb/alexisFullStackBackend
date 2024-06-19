@@ -13,26 +13,27 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-const uri = "mongodb+srv://alexismweb:Z0mB13NszjKfAAUC@clusterm1.fhsgffl.mongodb.net/?retryWrites=true&w=majority&appName=ClusterM1";
 
 // Connexion à la base de données
-const mongoUri = uri;
+const mongoUri = process.env.MONGO_URI;
+console.log(mongoUri);
 if (!mongoUri) {
     console.error('MongoDB URI is not defined in .env file');
     process.exit(1);
 }
 
-mongoose.connect(mongoUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
+mongoose.connect(mongoUri)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
 // Routes
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the API');
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
